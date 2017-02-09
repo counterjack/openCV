@@ -1,26 +1,6 @@
 #include "myHeaders.h"
 #include "myFunctions.h"
-
-class myOpenCV {
-private:
-  Mat input_image;
-  Mat output_image;
-
-public:
-  myOpenCV (Mat I);
-  // virtual ~myOpenCV ();
-  void showImage(const string title);
-
-};
-
-myOpenCV::myOpenCV(Mat I){
-  input_image = I;
-}
-
-void myOpenCV::showImage(const string title){
-  namedWindow(title, CV_WINDOW_AUTOSIZE);
-  imshow(title, input_image);
-}
+#include "myClass.h"
 
 int main(int argc, char const *argv[]) {
   if (argc != 2) {
