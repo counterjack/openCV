@@ -7,7 +7,7 @@
 * github: vipin14119
 */
 
-using namespace vipin;  // my custom namespace to prevent function name conflicts
+using namespace vipin;  // my custom namespace to prevent function name conflicts with other functions
 
 int main(int argc, char const *argv[]) {
   if (argc != 2) {
