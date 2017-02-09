@@ -19,17 +19,12 @@
 `#Define I[1-9]+ "Input Image [1-9]+"`<br>
 `#Define O[1-9]+ "Output Image [1-9]+"`<br>
 
-# Basic Header files
+### Functions in this project so far
 
-
-# Basic DataTypes
-
-1. Mat(Class) , all images are readed in this datatype
-
-
-# Basic Functions
-
-1. To read image = imread(IMAGE_PATH, Options) => Options - CV_LOAD_IMAGE_COLOR or CV_LOAD_IMAGE_GRAY
+1. `myReadImage(Mat object, read options)` 
+```
+Use this function to read image
+```
 2. To create a window = namedWindow("Title", Options) => Options - CV_WINDOW_AUTOSIZE
 3. To show image = imshow("Heading", Image object)
 4. 2D Sharpening = filter2D(I_Image, O_Image, I_Image.depth(), kernel)
