@@ -25,4 +25,5 @@
 
   Use this function when we have to read image
 2. `myShowImage(image title, Mat object)`
+
   Use this function when we have to show image with a title
