@@ -17,15 +17,12 @@ int main(int argc, char const *argv[]) {
 
   Mat kernel = (Mat_<char>(3, 3) << 0, -1, 0, -1, 5, -1, 0, -1, 0);
   Mat I = myReadImage(argv[1], CV_LOAD_IMAGE_COLOR);
-  // Mat O = my2DFilter(&I, &kernel);
-  // myShowImage("My Image", O);
 
   OpenCV object(&I);
   object.setKernel(&kernel);
-  std::cout << "Kernel is = " << object.getKernel() << '\n';
-  object.showImage("myImage");
 
-  // filter2D(I, J, I.depth(), kernel);
+  Mat O = object.filter2d();
+  myShowImage("Filter 2D", O);
 
   double alp = 0.5;
   Mat I1, I2, D;
