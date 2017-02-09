@@ -6,7 +6,7 @@ cmake_install.cmake
 images/
 
 # Atom IDE
-.DS_Store
+*.DS_Store
 
 # Prerequisites
 *.d
