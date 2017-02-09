@@ -24,8 +24,5 @@
 1. `myReadImage(Mat object, read options)`
 
   Use this function when we have to read image
-2. To create a window = namedWindow("Title", Options) => Options - CV_WINDOW_AUTOSIZE
-3. To show image = imshow("Heading", Image object)
-4. 2D Sharpening = filter2D(I_Image, O_Image, I_Image.depth(), kernel)
-5. Linear Blending 2 Image = addWeighted(I1, alpha, I2, 1 - alpha, gamma , O_Image)
-6.
+2. `myShowImage(image title, Mat object)`
+  Use this function when we have to show image with a title
