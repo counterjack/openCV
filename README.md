@@ -21,10 +21,8 @@
 
 ### Functions in this project so far
 
-1. `myReadImage(Mat object, read options)` 
-```
-Use this function to read image
-```
+1. `myReadImage(Mat object, read options)`
+.Use this function when we have to read image
 2. To create a window = namedWindow("Title", Options) => Options - CV_WINDOW_AUTOSIZE
 3. To show image = imshow("Heading", Image object)
 4. 2D Sharpening = filter2D(I_Image, O_Image, I_Image.depth(), kernel)
