@@ -20,7 +20,9 @@ int main(int argc, char const *argv[]) {
   // Mat O = my2DFilter(&I, &kernel);
   // myShowImage("My Image", O);
 
-  OpenCV object(I);
+  OpenCV object(&I);
+  object.setKernel(&kernel);
+  std::cout << "Kernel is = " << object.getKernel() << '\n';
   object.showImage("myImage");
 
   // filter2D(I, J, I.depth(), kernel);
