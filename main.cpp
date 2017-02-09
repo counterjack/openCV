@@ -1,21 +1,5 @@
-#include <stdio.h>
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <iostream>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <cstring>
-
-using namespace cv;
-using namespace std;
-
-/* Custom Functions declaration Starts */
-
-extern Mat myReadImage(string title, int option);
-extern void myShowImage(const string title, Mat Image);
-extern Mat myCreateMat(int rows, int cols, int depth, const char* mat_type = "default");
-extern Mat my2DFilter(const Mat *input_image, const Mat *kernel);
-
-/* Custom Functions declaration Ends */
+#include "myHeaders.h"
+#include "myFunctions.h"
 
 int main(int argc, char const *argv[]) {
   if (argc != 2) {
@@ -84,17 +68,17 @@ int main(int argc, char const *argv[]) {
 
   return 0;
 }
-Mat myReadImage(string path, int option){
+Mat myReadImage(const string path, int option){
   Mat Image = imread(path, option);
   return Image;
 }
 
-void myShowImage(const string title, Mat Image){
+void myShowImage(const string title, const Mat Image){
   namedWindow(title, CV_WINDOW_AUTOSIZE);
   imshow(title, Image);
 }
 
-Mat myCreateMat(int rows, int cols, int depth, const char* mat_type){
+Mat myCreateMat(const int rows, const int cols, const int depth, const char* mat_type){
 
   if (strcmp("ones", mat_type) == 0) {
     return Mat::ones(rows, cols, CV_8UC(depth));
