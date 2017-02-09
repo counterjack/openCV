@@ -1,3 +1,8 @@
+/*
+* Author: Vipin Chaudhary
+* github: vipin14119
+*/
+
 /* Custom Functions declaration Starts */
 
 extern Mat myReadImage(string title, int option);

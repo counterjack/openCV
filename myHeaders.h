@@ -5,5 +5,10 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <cstring>
 
+/*
+* Author: Vipin Chaudhary
+* github: vipin14119
+*/
+
 using namespace cv;
 using namespace std;

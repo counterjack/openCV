@@ -1,22 +1,30 @@
 #include "myHeaders.h"
 
-class myOpenCV {
-private:
-  Mat input_image;
-  Mat output_image;
+/*
+* Author: Vipin Chaudhary
+* github: vipin14119
+*/
 
-public:
-  myOpenCV (Mat I);
-  // virtual ~myOpenCV ();
-  void showImage(const string title);
 
-};
+namespace vipin{
+  class OpenCV {
+  private:
+    Mat input_image;
+    Mat output_image;
 
-extern myOpenCV::myOpenCV(Mat I){
-  input_image = I;
-}
+  public:
+    OpenCV (Mat I);
+    // virtual ~myOpenCV ();
+    void showImage(const string title);
 
-extern void myOpenCV::showImage(const string title){
-  namedWindow(title, CV_WINDOW_AUTOSIZE);
-  imshow(title, input_image);
+  };
+
+  extern OpenCV::OpenCV(Mat I){
+    input_image = I;
+  }
+
+  extern void OpenCV::showImage(const string title){
+    namedWindow(title, CV_WINDOW_AUTOSIZE);
+    imshow(title, input_image);
+  }
 }

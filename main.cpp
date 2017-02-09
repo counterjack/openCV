@@ -2,6 +2,13 @@
 #include "myFunctions.h"
 #include "myClass.h"
 
+/*
+* Author: Vipin Chaudhary
+* github: vipin14119
+*/
+
+using namespace vipin;  // my custom namespace to prevent function name conflicts
+
 int main(int argc, char const *argv[]) {
   if (argc != 2) {
     std::cerr << "Parameter wrong" << '\n' << "Usage : ./main [ARG] "<< '\n';
@@ -13,7 +20,7 @@ int main(int argc, char const *argv[]) {
   // Mat O = my2DFilter(&I, &kernel);
   // myShowImage("My Image", O);
 
-  myOpenCV object(I);
+  OpenCV object(I);
   object.showImage("myImage");
 
   // filter2D(I, J, I.depth(), kernel);
