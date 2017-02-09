@@ -1,7 +1,6 @@
 #include "myHeaders.h"
 #include "myFunctions.h"
 #include "myClass.h"
-#include "myExceptions.h"
 
 /*
 * Author: Vipin Chaudhary
@@ -59,77 +58,5 @@ int main(int argc, char const *argv[]) {
   // }
 
   waitKey(0);
-
-  // if (!s || !divideWith) {
-  //   cout << "Invalid number entered for dividing" << '\n';
-  //   return -1;
-  // }
-  // uchar table[256];
-  // for(int i=0;i<256;i++){
-  //   table[i] = (uchar)(divideWith * (i/divideWith));
-  // }
-  //
-  // Mat M(1, 256, CV_8U);
-  // uchar *p = M.data;
-  // for (size_t i = 0; i < 256; i++) {
-  //   p[i] = table[i];
-  // }
-  // const int times = 100;
-  // double t = (double)getTickCount();
-  //
-  // for (size_t i = 0; i < times; i++) {
-  //   LUT(I, M, J);
-  // }
-  //
-  // t = 1000*((double)getTickCount() - t)/getTickFrequency();
-  // t /= times;
-  // std::cout << "Time passed = "<< t << " milliseconds " << '\n';
-
-
-
   return 0;
-}
-Mat myReadImage(const string path, int option){
-  Mat Image = imread(path, option);
-  return Image;
-}
-
-void myShowImage(const string title, const Mat Image){
-  namedWindow(title, CV_WINDOW_AUTOSIZE);
-  imshow(title, Image);
-}
-
-Mat myCreateMat(const int rows, const int cols, const int depth, const char* mat_type){
-
-  if (strcmp("ones", mat_type) == 0) {
-    return Mat::ones(rows, cols, CV_8UC(depth));
-  }
-  else if (strcmp("zeros", mat_type) == 0) {
-    return Mat::zeros(rows, cols, CV_8UC(depth));
-  }
-  else if (strcmp("eye", mat_type) == 0) {
-    return Mat::eye(rows, cols, CV_8UC(depth));
-  }
-  else {
-    Mat M(rows, cols, CV_8UC(depth), Scalar::all(255));
-    return M;
-  }
-
-}
-
-Mat my2DFilter(const Mat *input_image, const Mat *kernel){
-  Mat Output_image;
-  std::cout << "Depth = " << input_image->depth() << '\n';
-  filter2D(*input_image, Output_image, (*input_image).depth(), *kernel);
-  return Output_image;
-}
-
-Mat myApply2DBlend(Mat *I1, Mat *I2, const double alpha){
-  Mat O;
-  if(I1->size() != I2->size() || I1->type() != I2->type()){
-    throw ImageNotSameException();
-  }
-  addWeighted(*I1, alpha, *I2, 1 - alpha, 0.0, O);
-  std::cout << "Came here" << '\n';
-  return O;
 }
