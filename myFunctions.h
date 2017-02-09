@@ -1,6 +1,6 @@
 /*
 * Author: Vipin Chaudhary
-* github: vipin14119
+* github: https://github.com/vipin14119/openCV
 */
 
 /* Custom Functions declaration Starts */

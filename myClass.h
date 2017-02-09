@@ -2,14 +2,14 @@
 
 /*
 * Author: Vipin Chaudhary
-* github: vipin14119
+* github: https://github.com/vipin14119/openCV
 */
 
 
 namespace vipin {
 
   class OpenCV {
-    
+
   private:
     Mat *input_image;
     Mat *output_image;

@@ -1,11 +1,18 @@
 #include "myHeaders.h"
 #include "myFunctions.h"
 #include "myClass.h"
+#include "myExceptions.h"
 
 /*
 * Author: Vipin Chaudhary
-* github: vipin14119
+* github: https://github.com/vipin14119/openCV
 */
+
+typedef Mat VipinImageObject;
+
+#ifndef MAX
+#define MAX 100
+#endif
 
 using namespace vipin;  // my custom namespace to prevent function name conflicts with other functions
 
@@ -18,7 +25,7 @@ int main(int argc, char const *argv[]) {
   Mat kernel = (Mat_<char>(3, 3) << 0, -1, 0, -1, 5, -1, 0, -1, 0);
   Mat I = myReadImage(argv[1], CV_LOAD_IMAGE_COLOR);
 
-  OpenCV object(&I);
+  vipin::OpenCV object(&I);
   object.setKernel(&kernel);
 
   Mat O = object.filter2d();
@@ -32,8 +39,12 @@ int main(int argc, char const *argv[]) {
     O = myApply2DBlend(&I1, &I2, alp);
     myShowImage("2D Blending", O);
   }
-  catch(const char *exception){
-    std::cerr << "ERROR : "<<exception << '\n';
+  catch(const char* e){
+    std::cerr << "ERROR : "<< e << '\n';
+    return -1;
+  }
+  catch(ImageNotSameException &e){
+    std::cerr << "ERROR : "<<e.what() << '\n';
     return -1;
   }
 
@@ -116,7 +127,7 @@ Mat my2DFilter(const Mat *input_image, const Mat *kernel){
 Mat myApply2DBlend(Mat *I1, Mat *I2, const double alpha){
   Mat O;
   if(I1->size() != I2->size() || I1->type() != I2->type()){
-    throw "Image Not same size or same type";
+    throw ImageNotSameException();
   }
   addWeighted(*I1, alpha, *I2, 1 - alpha, 0.0, O);
   std::cout << "Came here" << '\n';
