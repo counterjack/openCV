@@ -4,33 +4,50 @@
 
 /*
 * Author: Vipin Chaudhary
-* github: vipin14119
+* github: https://github.com/vipin14119/openCV
 */
 
-using namespace vipin;  // my custom namespace to prevent function name conflicts
+typedef Mat VipinImageObject;
+
+#ifndef MAX
+#define MAX 100
+#endif
+
+using namespace vipin;  // my custom namespace to prevent function name conflicts with other functions
 
 int main(int argc, char const *argv[]) {
-  if (argc != 2) {
+  if (argc != 3) {
     std::cerr << "Parameter wrong" << '\n' << "Usage : ./main [ARG] "<< '\n';
     return -1;
   }
 
   Mat kernel = (Mat_<char>(3, 3) << 0, -1, 0, -1, 5, -1, 0, -1, 0);
   Mat I = myReadImage(argv[1], CV_LOAD_IMAGE_COLOR);
-  // Mat O = my2DFilter(&I, &kernel);
-  // myShowImage("My Image", O);
 
-  OpenCV object(I);
-  object.showImage("myImage");
+  vipin::OpenCV object(&I);
+  object.setKernel(&kernel);
 
-  // filter2D(I, J, I.depth(), kernel);
+  Mat O = object.filter2d();
+  // myShowImage("Filter 2D", O);
 
   double alp = 0.5;
-  Mat I1, I2, D;
+  Mat I1, I2;
+  I1 = imread(argv[1], CV_LOAD_IMAGE_COLOR);
+  I2 = imread(argv[2], CV_LOAD_IMAGE_COLOR);
+  try{
+    O = myApply2DBlend(&I1, &I2, alp);
+    myShowImage("2D Blending", O);
+  }
+  catch(const char* e){
+    std::cerr << "ERROR : "<< e << '\n';
+    return -1;
+  }
+  catch(ImageNotSameException &e){
+    std::cerr << "ERROR : "<<e.what() << '\n';
+    return -1;
+  }
 
-  I1 = imread("./images/2.jpg");
-  I2 = imread("./images/6.jpg");
-
+  myShowImage("Basic Transformation", myBasicLinearTransform(&I1, 2.2, 50));
   // Mat new_image = Mat::zeros(I1.size(), I1.type());
   //
   // for (size_t i = 0; i < I1.rows; i++) {
@@ -41,75 +58,6 @@ int main(int argc, char const *argv[]) {
   //   }
   // }
 
-  // myShowImage("My Image", myReadImage(argv[1], CV_LOAD_IMAGE_COLOR));
-  // std::cout << "M = " << myCreateMat(3, 3, 1) << '\n';
-  // namedWindow("Original image", CV_WINDOW_AUTOSIZE);
-  // namedWindow("New image", CV_WINDOW_AUTOSIZE);
-  // // addWeighted(I1, alp, I2, 1 - alp, 0.0, D);
-  // imshow("Original image", readImage("./images/2.jpg", CV_LOAD_IMAGE_COLOR));
-  // imshow("New image", new_image);
   waitKey(0);
-
-  // if (!s || !divideWith) {
-  //   cout << "Invalid number entered for dividing" << '\n';
-  //   return -1;
-  // }
-  // uchar table[256];
-  // for(int i=0;i<256;i++){
-  //   table[i] = (uchar)(divideWith * (i/divideWith));
-  // }
-  //
-  // Mat M(1, 256, CV_8U);
-  // uchar *p = M.data;
-  // for (size_t i = 0; i < 256; i++) {
-  //   p[i] = table[i];
-  // }
-  // const int times = 100;
-  // double t = (double)getTickCount();
-  //
-  // for (size_t i = 0; i < times; i++) {
-  //   LUT(I, M, J);
-  // }
-  //
-  // t = 1000*((double)getTickCount() - t)/getTickFrequency();
-  // t /= times;
-  // std::cout << "Time passed = "<< t << " milliseconds " << '\n';
-
-
-
   return 0;
-}
-Mat myReadImage(const string path, int option){
-  Mat Image = imread(path, option);
-  return Image;
-}
-
-void myShowImage(const string title, const Mat Image){
-  namedWindow(title, CV_WINDOW_AUTOSIZE);
-  imshow(title, Image);
-}
-
-Mat myCreateMat(const int rows, const int cols, const int depth, const char* mat_type){
-
-  if (strcmp("ones", mat_type) == 0) {
-    return Mat::ones(rows, cols, CV_8UC(depth));
-  }
-  else if (strcmp("zeros", mat_type) == 0) {
-    return Mat::zeros(rows, cols, CV_8UC(depth));
-  }
-  else if (strcmp("eye", mat_type) == 0) {
-    return Mat::eye(rows, cols, CV_8UC(depth));
-  }
-  else {
-    Mat M(rows, cols, CV_8UC(depth), Scalar::all(255));
-    return M;
-  }
-
-}
-
-Mat my2DFilter(const Mat *input_image, const Mat *kernel){
-  Mat Output_image;
-  std::cout << "Depth = " << input_image->depth() << '\n';
-  filter2D(*input_image, Output_image, (*input_image).depth(), *kernel);
-  return Output_image;
 }
