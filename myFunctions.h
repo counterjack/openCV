@@ -1,4 +1,6 @@
+#include "myHeaders.h"
 #include "myExceptions.h"
+
 /*
 * Author: Vipin Chaudhary
 * github: https://github.com/vipin14119/openCV
@@ -11,6 +13,7 @@ extern void myShowImage(const string title, const  Mat Image);
 extern Mat myCreateMat(const int rows, const int cols, const  int depth, const char* mat_type = "default");
 extern Mat my2DFilter(const Mat *input_image, const Mat *kernel);
 extern Mat myApply2DBlend(Mat *I1, Mat *I2, const double alpha);
+extern Mat myBasicLinearTransform(const Mat* I, const double alpha, const double beta);
 
 /* Custom Functions declaration Ends */
 
@@ -57,5 +60,17 @@ Mat myApply2DBlend(Mat *I1, Mat *I2, const double alpha){
   }
   addWeighted(*I1, alpha, *I2, 1 - alpha, 0.0, O);
   std::cout << "Came here" << '\n';
+  return O;
+}
+
+Mat myBasicLinearTransform(const Mat* I, const double alpha, const double beta){
+  Mat O = Mat::zeros(I->size(), I->type());
+  for (size_t i = 0; i < I->rows; i++) {
+    for (size_t j = 0; j < I->cols; j++) {
+      for (size_t k = 0; k < 3; k++) {
+        O.at<Vec3b>(i,j)[k] = saturate_cast<uchar>(alpha*I->at<Vec3b>(i,j)[k] + beta);
+      }
+    }
+  }
   return O;
 }

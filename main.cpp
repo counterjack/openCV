@@ -47,6 +47,7 @@ int main(int argc, char const *argv[]) {
     return -1;
   }
 
+  myShowImage("Basic Transformation", myBasicLinearTransform(&I1, 2.2, 50));
   // Mat new_image = Mat::zeros(I1.size(), I1.type());
   //
   // for (size_t i = 0; i < I1.rows; i++) {
