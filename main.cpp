@@ -1,6 +1,27 @@
 #include "myHeaders.h"
 #include "myFunctions.h"
 
+class myOpenCV {
+private:
+  Mat input_image;
+  Mat output_image;
+
+public:
+  myOpenCV (Mat I);
+  // virtual ~myOpenCV ();
+  void showImage(const string title);
+
+};
+
+myOpenCV::myOpenCV(Mat I){
+  input_image = I;
+}
+
+void myOpenCV::showImage(const string title){
+  namedWindow(title, CV_WINDOW_AUTOSIZE);
+  imshow(title, input_image);
+}
+
 int main(int argc, char const *argv[]) {
   if (argc != 2) {
     std::cerr << "Parameter wrong" << '\n' << "Usage : ./main [ARG] "<< '\n';
@@ -9,8 +30,11 @@ int main(int argc, char const *argv[]) {
 
   Mat kernel = (Mat_<char>(3, 3) << 0, -1, 0, -1, 5, -1, 0, -1, 0);
   Mat I = myReadImage(argv[1], CV_LOAD_IMAGE_COLOR);
-  Mat O = my2DFilter(&I, &kernel);
-  myShowImage("My Image", O);
+  // Mat O = my2DFilter(&I, &kernel);
+  // myShowImage("My Image", O);
+
+  myOpenCV object(I);
+  object.showImage("myImage");
 
   // filter2D(I, J, I.depth(), kernel);
 
