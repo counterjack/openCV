@@ -1,3 +1,13 @@
+# OpenCv
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+images/
+
+# Atom IDE
+.DS_Store
+
 # Prerequisites
 *.d
 
