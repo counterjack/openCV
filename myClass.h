@@ -7,8 +7,9 @@
 
 
 namespace vipin {
-  
+
   class OpenCV {
+    
   private:
     Mat *input_image;
     Mat *output_image;

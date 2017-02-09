@@ -10,7 +10,7 @@
 using namespace vipin;  // my custom namespace to prevent function name conflicts with other functions
 
 int main(int argc, char const *argv[]) {
-  if (argc != 2) {
+  if (argc != 3) {
     std::cerr << "Parameter wrong" << '\n' << "Usage : ./main [ARG] "<< '\n';
     return -1;
   }
@@ -22,13 +22,20 @@ int main(int argc, char const *argv[]) {
   object.setKernel(&kernel);
 
   Mat O = object.filter2d();
-  myShowImage("Filter 2D", O);
+  // myShowImage("Filter 2D", O);
 
   double alp = 0.5;
-  Mat I1, I2, D;
-
-  I1 = imread("./images/2.jpg");
-  I2 = imread("./images/6.jpg");
+  Mat I1, I2;
+  I1 = imread(argv[1], CV_LOAD_IMAGE_COLOR);
+  I2 = imread(argv[2], CV_LOAD_IMAGE_COLOR);
+  try{
+    O = myApply2DBlend(&I1, &I2, alp);
+    myShowImage("2D Blending", O);
+  }
+  catch(const char *exception){
+    std::cerr << "ERROR : "<<exception << '\n';
+    return -1;
+  }
 
   // Mat new_image = Mat::zeros(I1.size(), I1.type());
   //
@@ -40,13 +47,6 @@ int main(int argc, char const *argv[]) {
   //   }
   // }
 
-  // myShowImage("My Image", myReadImage(argv[1], CV_LOAD_IMAGE_COLOR));
-  // std::cout << "M = " << myCreateMat(3, 3, 1) << '\n';
-  // namedWindow("Original image", CV_WINDOW_AUTOSIZE);
-  // namedWindow("New image", CV_WINDOW_AUTOSIZE);
-  // // addWeighted(I1, alp, I2, 1 - alp, 0.0, D);
-  // imshow("Original image", readImage("./images/2.jpg", CV_LOAD_IMAGE_COLOR));
-  // imshow("New image", new_image);
   waitKey(0);
 
   // if (!s || !divideWith) {
@@ -111,4 +111,14 @@ Mat my2DFilter(const Mat *input_image, const Mat *kernel){
   std::cout << "Depth = " << input_image->depth() << '\n';
   filter2D(*input_image, Output_image, (*input_image).depth(), *kernel);
   return Output_image;
+}
+
+Mat myApply2DBlend(Mat *I1, Mat *I2, const double alpha){
+  Mat O;
+  if(I1->size() != I2->size() || I1->type() != I2->type()){
+    throw "Image Not same size or same type";
+  }
+  addWeighted(*I1, alpha, *I2, 1 - alpha, 0.0, O);
+  std::cout << "Came here" << '\n';
+  return O;
 }
