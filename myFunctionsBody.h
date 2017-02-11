@@ -1,25 +1,11 @@
-#include "myHeaders.h"
-#include "myExceptions.h"
-
-/*
-* Author: Vipin Chaudhary
-* github: https://github.com/vipin14119/openCV
-*/
-
-/* Custom Functions declaration Starts */
-
-extern Mat myReadImage(string title, int option);
-extern void myShowImage(const string title, const  Mat Image);
-extern Mat myCreateMat(const int rows, const int cols, const  int depth, const char* mat_type = "default");
-extern Mat my2DFilter(const Mat *input_image, const Mat *kernel);
-extern Mat myApply2DBlend(Mat *I1, Mat *I2, const double alpha);
-extern Mat myBasicLinearTransform(const Mat* I, const double alpha, const double beta);
-
-/* Custom Functions declaration Ends */
+#include "myFunctionsDeclarations.h"
 
 
 Mat myReadImage(const string path, int option){
   Mat Image = imread(path, option);
+  if (!Image.data) {
+    throw InvalidImageException();
+  }
   return Image;
 }
 
@@ -73,4 +59,35 @@ Mat myBasicLinearTransform(const Mat* I, const double alpha, const double beta){
     }
   }
   return O;
+}
+void MyEllipse(Mat *img, const double angle){
+  int thickness = 2;
+  int lineType = 10;
+  ellipse(
+    *img,
+    Point( SIZE/2, SIZE/2 ),
+    Size( SIZE/4, SIZE/16 ),
+    angle,
+    0,
+    360,
+    Scalar( 255, 0, 0 ),
+    thickness,
+    lineType
+  );
+}
+void MyPolygon(Mat *img){
+
+}
+void MyLine(Mat *img, const Point *start, const Point *end){
+
+}
+void MyFilledCircle(Mat *img, const Point center){
+  circle(
+    *img,
+    center,
+    SIZE/32,
+    Scalar( 0, 0, 255 ),
+    FILLED,
+    LINE_8
+  );
 }
