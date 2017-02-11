@@ -80,7 +80,8 @@ int main(int argc, char const *argv[]) {
         char drawing1[] = "Atom Image";
         char drawing2[] = "Rook Image";
 
-        Mat atom = myCreateMat(SIZE, SIZE, 3, "zeros");
+        // Mat atom = myCreateMat(SIZE, SIZE, 3, "zeros");
+        Mat atom(SIZE, SIZE, CV_8UC3, Scalar(240, 240, 240));
         Mat rook = myCreateMat(SIZE, SIZE, 3, "zeros");
 
         // Drawing atom
@@ -89,6 +90,26 @@ int main(int argc, char const *argv[]) {
         MyEllipse(&atom, (double)45);
         MyEllipse(&atom, (double)-45);
         MyFilledCircle(&atom, Point( SIZE/2, SIZE/2) );
+
+        // Outer Square
+        MyLine(&atom, Point( 100, 100), Point( SIZE-100, 100));
+        MyLine(&atom, Point( 100, 100), Point( 100, SIZE-100));
+        MyLine(&atom, Point( 100, SIZE-100), Point( SIZE-100, SIZE-100));
+        MyLine(&atom, Point( SIZE-100, 100), Point( SIZE-100, SIZE-100));
+
+        // Outer Square
+        MyLine(&atom, Point( 75, 75), Point( SIZE-75, 75));
+        MyLine(&atom, Point( 75, 75), Point( 75, SIZE-75));
+        MyLine(&atom, Point( 75, SIZE-75), Point( SIZE-75, SIZE-75));
+        MyLine(&atom, Point( SIZE-75, 75), Point( SIZE-75, SIZE-75));
+
+        // Inner Square
+        MyLine(&atom, Point( 50, 50), Point( SIZE-50, 50));
+        MyLine(&atom, Point( 50, 50), Point( 50, SIZE-50));
+        MyLine(&atom, Point( 50, SIZE-50), Point( SIZE-50, SIZE-50));
+        MyLine(&atom, Point( SIZE-50, 50), Point( SIZE-50, SIZE-50));
+        // MyLine(&atom, Point( 100, 100), Point( SIZE-100, 100));
+        // MyLine(&atom, Point( 100, 100), Point( SIZE-100, 100));
         // std::cout << "Atom = " << atom << '\n';
         namedWindow(drawing1, CV_WINDOW_AUTOSIZE);
         imshow( drawing1, atom );

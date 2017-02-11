@@ -70,7 +70,7 @@ void MyEllipse(Mat *img, const double angle){
     angle,
     0,
     360,
-    Scalar( 255, 0, 0 ),
+    Scalar( 150, 250, 50 ),
     thickness,
     lineType
   );
@@ -78,15 +78,24 @@ void MyEllipse(Mat *img, const double angle){
 void MyPolygon(Mat *img){
 
 }
-void MyLine(Mat *img, const Point *start, const Point *end){
-
+void MyLine(Mat *img, const Point start, const Point end){
+  int thickness = 2;
+  int lineType = 10;
+  line(
+    *img,
+    start,
+    end,
+    Scalar( 150, 250, 50 ),
+    thickness,
+    lineType
+  );
 }
 void MyFilledCircle(Mat *img, const Point center){
   circle(
     *img,
     center,
     SIZE/32,
-    Scalar( 0, 0, 255 ),
+    Scalar( 50, 50, 200 ),
     FILLED,
     LINE_8
   );
