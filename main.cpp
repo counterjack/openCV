@@ -1,5 +1,5 @@
 #include "myHeaders.h"
-#include "myFunctions.h"
+#include "myFunctionsBody.h"
 #include "myClass.h"
 
 /*
@@ -8,10 +8,6 @@
 */
 
 typedef Mat VipinImageObject;
-
-#ifndef MAX
-#define SIZE 400
-#endif
 
 using namespace vipin;  // my custom namespace to prevent function name conflicts with other functions
 
@@ -32,15 +28,21 @@ int main(int argc, char const *argv[]) {
         // Apply 2D filter using my class
         string image_path;
         std::cin >> image_path;
-        kernel = (Mat_<char>(3, 3) << 0, -1, 0, -1, 5, -1, 0, -1, 0);
-        I = myReadImage(image_path, CV_LOAD_IMAGE_COLOR);
+        try{
+          kernel = (Mat_<char>(3, 3) << 0, -1, 0, -1, 5, -1, 0, -1, 0);
+          I = myReadImage(image_path, CV_LOAD_IMAGE_COLOR);
 
-        vipin::OpenCV object(&I);
-        object.setKernel(&kernel);
+          vipin::OpenCV object(&I);
+          object.setKernel(&kernel);
 
-        O = object.filter2d();
-        myShowImage("Filter 2D", O);
-        waitKey(0);
+          O = object.filter2d();
+          myShowImage("Filter 2D", O);
+          waitKey(0);
+        }
+        catch(InvalidImageException &e){
+          std::cerr << "ERROR : "<<e.what() << '\n';
+        }
+
         break;
       }
     case 2:
@@ -70,7 +72,21 @@ int main(int argc, char const *argv[]) {
       }
     case 4:
       {
-        std::cout << "/* message */" << '\n';
+        char drawing1[] = "Atom Image";
+        char drawing2[] = "Rook Image";
+
+        Mat atom = myCreateMat(SIZE, SIZE, 3, "zeros");
+        Mat rook = myCreateMat(SIZE, SIZE, 3, "zeros");
+
+        // Drawing atom
+        MyEllipse(&atom, (double)90);
+        MyEllipse(&atom, (double)0);
+        MyEllipse(&atom, (double)45);
+        MyEllipse(&atom, (double)-45);
+        MyFilledCircle(&atom, Point( SIZE/2, SIZE/2) );
+        // std::cout << "Atom = " << atom << '\n';
+        imshow( drawing1, atom );
+        waitKey(0);
         break;
       }
     default:
@@ -78,9 +94,5 @@ int main(int argc, char const *argv[]) {
       std::cout << "/* message */" << '\n';
       break;
   }
-
-
-
-
   return 0;
 }
