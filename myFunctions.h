@@ -24,7 +24,7 @@ Mat myReadImage(const string path, int option){
 }
 
 void myShowImage(const string title, const Mat Image){
-  namedWindow(title, CV_WINDOW_AUTOSIZE);
+  namedWindow(title, CV_WINDOW_NORMAL);
   imshow(title, Image);
 }
 
