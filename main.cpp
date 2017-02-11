@@ -18,9 +18,15 @@ int main(int argc, char const *argv[]) {
   // }
 
   int choice;
-  std::cin >> choice;
-
   Mat I, I1, I2, O, kernel;
+
+  std::cout << "1. 2D Filter" << '\n';
+  std::cout << "2. 2D Blending" << '\n';
+  std::cout << "3. 2D Transformation" << '\n';
+  std::cout << "4. 2D Atom" << '\n';
+  std::cout << "Enter your Number = ";
+
+  std::cin >> choice;
 
   switch (choice) {
     case 1:
@@ -42,7 +48,6 @@ int main(int argc, char const *argv[]) {
         catch(InvalidImageException &e){
           std::cerr << "ERROR : "<<e.what() << '\n';
         }
-
         break;
       }
     case 2:
@@ -85,6 +90,7 @@ int main(int argc, char const *argv[]) {
         MyEllipse(&atom, (double)-45);
         MyFilledCircle(&atom, Point( SIZE/2, SIZE/2) );
         // std::cout << "Atom = " << atom << '\n';
+        namedWindow(drawing1, CV_WINDOW_AUTOSIZE);
         imshow( drawing1, atom );
         waitKey(0);
         break;
@@ -94,5 +100,6 @@ int main(int argc, char const *argv[]) {
       std::cout << "/* message */" << '\n';
       break;
   }
+
   return 0;
 }
