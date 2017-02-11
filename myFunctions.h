@@ -14,6 +14,10 @@ extern Mat myCreateMat(const int rows, const int cols, const  int depth, const c
 extern Mat my2DFilter(const Mat *input_image, const Mat *kernel);
 extern Mat myApply2DBlend(Mat *I1, Mat *I2, const double alpha);
 extern Mat myBasicLinearTransform(const Mat* I, const double alpha, const double beta);
+extern void MyEllipse(Mat *img, const double *angle);
+extern void MyPolygon(Mat *img);
+extern void MyLine(Mat *img, const Point *start, const Point *end);
+extern void MyFilledCircle(Mat *img, const Point *center);
 
 /* Custom Functions declaration Ends */
 
@@ -73,4 +77,16 @@ Mat myBasicLinearTransform(const Mat* I, const double alpha, const double beta){
     }
   }
   return O;
+}
+void MyEllipse(Mat *img, const double *angle){
+
+}
+void MyPolygon(Mat *img){
+
+}
+void MyLine(Mat *img, const Point *start, const Point *end){
+
+}
+void MyFilledCircle(Mat *img, const Point *center){
+  
 }
